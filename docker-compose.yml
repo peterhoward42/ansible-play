@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+
+  python1:
+    image: python:buster
+    tty: true 
+
+  python2:
+    image: python:buster
+    tty: true 
