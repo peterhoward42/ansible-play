@@ -1,0 +1,5 @@
+o  add ansible mc
+o  get working std alone as a docker file
+	o  from python3-xxx
+	o  pip install ansible
+	o  now install the package

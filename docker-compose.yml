@@ -9,3 +9,7 @@ services:
   python2:
     image: python:buster
     tty: true 
+
+  ansible:
+    image: ansible
+    tty: true
