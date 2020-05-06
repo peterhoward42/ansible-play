@@ -1,6 +1,6 @@
 FROM python:3-buster
 
-WORKDIR /usr/src/app
+WORKDIR /
 
 RUN pip install ansible
 

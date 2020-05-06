@@ -2,14 +2,19 @@ version: '3'
 
 services:
 
-  python1:
+  managed-node-a:
     image: python:buster
+    container_name: ansible-managed-a
     tty: true 
 
-  python2:
+  managed-node-b:
     image: python:buster
+    container_name: ansible-managed-b
     tty: true 
 
-  ansible:
+  control-node:
     image: ansible
+    container_name: ansible-control
     tty: true
+    volumes:
+      - ./tutorial:/tutorial

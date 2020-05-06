@@ -1,5 +1,10 @@
-o  add ansible mc
-o  get working std alone as a docker file
-	o  from python3-xxx
-	o  pip install ansible
-	o  now install the package
+*  add ansible mc
+*  give ansible mc a volume and mount repo onto it with hosts file
+o  give the mcs better hostnames
+    *  control node / managed node
+    o  but want to ditch auto-generated suffices?
+    o  can try this at runtime:
+        o  docker-compose up --scale pspdfkit=5
+
+o  update readme with new hostnames
+o  start the tutorial
