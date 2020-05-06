@@ -1,3 +1,4 @@
-[targets]
-ansible-play_python1_1
-ansible-play_python1_2
+[managed-nodes]
+ansible-play_managed-node_1
+ansible-play_managed-node_2
+

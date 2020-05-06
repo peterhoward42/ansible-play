@@ -1,10 +1,47 @@
 *  add ansible mc
 *  give ansible mc a volume and mount repo onto it with hosts file
-o  give the mcs better hostnames
-    *  control node / managed node
-    o  but want to ditch auto-generated suffices?
-    o  can try this at runtime:
-        o  docker-compose up --scale pspdfkit=5
+*  give the mcs better hostnames and scale service rather than c&p
+*  do these nodes have ssh installed and configured = yes
+*  update readme with new hostnames
+o  timeout to upgrade the containers to have working ssh
+    o  read how to establish ssh between hosts in docker-compose
+        o  need to run sshd in the containers
+        o  see https://forums.docker.com/t/ssh-from-one-containe-to-another-container/65906/8
+        o  try doing interactively (ephemerally in one of the managed nodes) to really
+            understand what its doing
+            o  see notes below
+            
+            
+        o  divert to make a common machine docker file intermediate image to use for
+           both managed nodes and ansible - ie debian + python + ssl with known user
 
-o  update readme with new hostnames
+
 o  start the tutorial
+    o  attempt to get the nginx playbook to work, then document it,
+        *  wait for ssh not being configured to bite so we have a use case to debug
+        *  fix the hosts cited in the hosts and check the group name
+        *  write the playbook, modified as per
+        *  confirm that it becomes mounted alongside hosts file
+        o  try running it from control node terminal
+            o  bang! - hit the ssh blockage
+                
+        
+    o  change hosts group name because it complains:
+        o  Invalid characters were found in group names
+
+
+
+o  things to note
+    *  installing ssh tries to install and configure ssh server, including
+               minting some keys (which are output to the console)
+    *  this:
+            openssl passwd -1 fibble
+       outputs the md5 hash of fibble, (and presumably registers the pair?)
+    *  $(stuff) evaluates the std out from stuff
+    *  useradd .... usersname - edits /etc/passwd, makes a home dir for usersname etc
+    *  the options used are
+        *  -p md5-of-usersname-password
+        *  --create-home
+        *  --shell /bin/bash
+        *  --groups sudo 
+    *  /usr/sbin/sshd -D runs the ssh daemon - presumably more common to do so in background
