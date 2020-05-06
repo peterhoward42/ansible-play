@@ -23,12 +23,12 @@ docker build -t ansible .
 ### Bringing Up The Environment
 
 ```
-docker-compose up -d --remove-orphans
-docker ps                                      # Are the services up?
-docker exec -it ansible-control /bin/bash      # Login to a shell on the control machine
-ping ansible-managed-a                         # Are the virtual IP addresses viable?
-ping ansible-managed-b
-ansible some-args                              # Can I run ansible here?
+docker-compose up -d --remove-orphans --scale managed-node=2 
+docker ps                                      
+docker exec -it ansible-play_control-node_1 /bin/bash 
+ping ansible-play_managed-node_1                    
+ping ansible-play_managed-node_2                   
+ansible some-args                              
 ...
 CTRL-d
 
