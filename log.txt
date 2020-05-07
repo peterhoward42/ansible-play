@@ -14,6 +14,11 @@ o  timeout to upgrade the containers to have working ssh
             
         o  divert to make a common machine docker file intermediate image to use for
            both managed nodes and ansible - ie debian + python + ssl with known user
+            o  attempt to build it using hardcoded username and password
+            o  trying ubuntu base to get ssh working
+            o  now install python3
+
+            fart struggling - maybe capitulate and use https://github.com/phusion/baseimage-docker#readme
 
 
 o  start the tutorial
