@@ -1,18 +1,18 @@
-# Produces a linux container with python installed, the
-# ssh daemon running, and one (ssh) user provisioned.
+# Alpine Linux + ssh + Python 3
 
-# You specify the username and password you want in
-# environment variables at docker-build time.
+# The danielguerra/alpine-sshd base image does the following to Alpine:
 
-FROM python:3-buster
+# - installs the openssh package
+# - installs a (neccesary) Docker ENTRYPOINT scrpt to:
+#     - install a rsa key
+#     - make sure that /var/run/sshd exists (a dir)
+#     - hand off control to the Dockerfile's CMD
+# - specifies a (necessary) CMD to run the ssh daemon.
 
-RUN apt-get update && \
-apt-get install -y netcat ssh iputils-ping && \
-mkdir /var/run/sshd && \
-chmod 0755 /var/run/sshd && \
-useradd -p $(openssl passwd -1 userfibblepass) --create-home --shell /bin/bash --groups sudo userfibble
+# Note that it does not:
+# - create users or passwords
+# - register any user's authorized keys with ssh
 
-EXPOSE 22
+# These things *are* necessary however, and must be accomplished separately.
 
-CMD [ "tail", "-f", "/dev/null"]
-#CMD ["/usr/sbin/sshd", “-D”]
+FROM danielguerra/alpine-sshd:3.7

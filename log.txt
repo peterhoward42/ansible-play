@@ -3,22 +3,67 @@
 *  give the mcs better hostnames and scale service rather than c&p
 *  do these nodes have ssh installed and configured = yes
 *  update readme with new hostnames
-o  timeout to upgrade the containers to have working ssh
-    o  read how to establish ssh between hosts in docker-compose
-        o  need to run sshd in the containers
-        o  see https://forums.docker.com/t/ssh-from-one-containe-to-another-container/65906/8
-        o  try doing interactively (ephemerally in one of the managed nodes) to really
-            understand what its doing
-            o  see notes below
-            
-            
-        o  divert to make a common machine docker file intermediate image to use for
-           both managed nodes and ansible - ie debian + python + ssl with known user
-            o  attempt to build it using hardcoded username and password
-            o  trying ubuntu base to get ssh working
-            o  now install python3
 
-            fart struggling - maybe capitulate and use https://github.com/phusion/baseimage-docker#readme
+o  try this one
+	https://hub.docker.com/r/danielguerra/alpine-sshd/dockerfile/
+
+	*  build and run it
+	*  confirm that sshd is running
+	*  confirm that the key created by entrypoint is there
+	*  see what users are present = only human is root 
+	o  checkpoint
+
+	o  encouraging
+		o  grok it fully before trying it
+		o  should go for key based ssh
+		o  need to also set up a container that holds your public key
+		   in a volume, and mount that to daniels container at <run> time.
+		   See https://github.com/danielguerra69/alpine-sshd
+		o  then must tell your local ssh agent about that key pair - 
+		   see also same web page info.
+		o  then can run that image as is - telling it to mount the
+		   volume with the public key in it from the first container
+		o  we could instead prepare this key pair - and write it into
+		   the container fs in the docker file if we wrap daniels no?
+		o  consider making wrapper based on Dainel's
+			o  noting that it provides a cmd and an entry point
+
+o  try this one
+	o  https://phoenixnap.com/kb/how-to-ssh-into-docker-container
+		o  the install of sshserver works, but not booting it
+		o  cannot run systemctl because system was not booted as an init system
+		o  so try the makedir / chmod / explicit run way
+		o  do I need to expose port 22
+		o  do I need to setup user and password or keys?
+
+
+o  timeout to upgrade the containers to have working ssh
+        *  try https://forums.docker.com/t/ssh-from-one-containe-to-another-container/65906/8
+        *  doesn't work :-(
+
+		o  try basing on chusiang/ansible-managed-node
+			o  std alone dockerfile
+				*  does it build and run = yes
+				*  switch to debian tag
+				o  can I ssh into it?
+			o  in compose
+				o  can I ssh into it?
+		o  note in readme account credentials
+o  move control into same pattern
+
+        o  try https://github.com/phusion/baseimage-docker#readme
+            *  read again and note what will need to do
+			o  not sure about this ... are there alternatives?
+				o  how about https://hub.docker.com/r/chusiang/ansible-managed-node/
+            o  work through it
+                o  start with canonical case and see if it stays up 
+				o  add enablish ssh section to docker file
+				o  add bit that enables insecure ssh key to docker file
+				o  should now be able to login using instructions
+        o  clean up and document
+
+
+o  add python3
 
 
 o  start the tutorial
