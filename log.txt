@@ -11,7 +11,63 @@ o  try this one
 	*  confirm that sshd is running
 	*  confirm that the key created by entrypoint is there
 	*  see what users are present = only human is root 
-	o  checkpoint
+	*  checkpoint
+	o  load my local public rsa key into the image
+		*  have I got one, and it not server specific?
+		*  where does daniel say it must go - /root/.ssh/authorized_keys
+		*  what is there now? = nothing, no /root/.ssh dir
+		o  here is a recipe to make it so
+			o  https://stackoverflow.com/questions/51732269/how-to-pass-local-machines-ssh-key-to-docker-container
+		*  transcribe here to go later in instructions
+			o  you can inject info to the build process like this
+			o  when you build the container add this to the cmd line:
+				--build-arg SSH_KEY="$(cat ~/file/outside/build/context/id_rsa)"
+			o  now to use in the dockerfile:
+				ARG SSH_KEY
+				ENV SSH_KEY=$SSH_KEY
+				RUN mkdir /root/.ssh/
+				RUN echo "$SSH_KEY" > /root/.ssh/id_rsa
+				RUN chmod 600 /root/.ssh/id_rsa
+		o  try it and make sure has arrived
+
+
+
+			o  fart
+			o  divert to use make for this to save all the slow typing
+			   iteration
+				*  inaugurate makefile
+				*  target called managed-node-image
+				*  target called managed-node-run
+				*  sort out container name in use problem
+				*  sort out container running
+				*  use constant for managednode string = don't bother
+				o  set build-arg from echo ssh do dah
+					*  hard coded
+					*  does it run?
+					o  does it end up in servers /root/.ssh/auth...
+						*  no, but the file exists
+						*  setting build arg to "fibble" works ?
+				o  improvment on hard coded?
+				o  can we test this for mpt or not found?
+		
+			o  where to put error handling for no local rsa key?
+
+
+
+
+
+			o  Add the dockerfile parts
+				o  See what happens if you don't provide the SSH_KEY argument
+				   at build time - hopefully complain...
+					o  it does not complain :-( maybe it assumes the
+					   the arg is mt string?
+					o  update macos
+					o  update docker
+	o  why suggesting run it with run -p 4848:22 ?
+	o  can I ssh into it now?
+	o  can I inject the public key from an env var, rather than a file, or
+	   an envvar that says what file to use?
+
 
 	o  encouraging
 		o  grok it fully before trying it
