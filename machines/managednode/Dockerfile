@@ -1,13 +1,20 @@
-# This produces: Ubuntu + ssh server + Python 3
+# This produces: Ubuntu + (running) ssh server + Python 3
 
+# rastasheep's base image provides Ubuntu + the running ssh server.
+# But it allows password authentication for root access, so we
+# configure rsa key based authentication, and disable password authentication.
 FROM rastasheep/ubuntu-sshd:18.04
 
-# # Write a public rsa access key to the server's authorized_keys file,
-# # sourcing the value by expecting a SSH_KEY command line argument
-# # when <docker build> is run.
+# Helps for development to have vi.
+RUN apt update; apt install --assume-yes vim
 
-# ARG SSH_KEY
-# ENV SSH_KEY=$SSH_KEY
-# RUN mkdir /root/.ssh/
-# RUN echo "$SSH_KEY" > /root/.ssh/authorized_keys
-# RUN chmod 600 /root/.ssh/authorized_keys
+# Write a public rsa access key to the server's authorized_keys file,
+# sourcing the value by expecting a SSH_KEY command line argument
+# when <docker build> is run.
+ARG SSH_KEY
+ENV SSH_KEY=$SSH_KEY
+RUN echo "$SSH_KEY" > /root/.ssh/authorized_keys
+RUN chmod 600 /root/.ssh/authorized_keys
+
+# Disable password-authenticated ssh access
+RUN sed --re -i 's/^\#?PasswordAuthentication.*$/PasswordAuthentication no/' /etc/ssh/sshd_config

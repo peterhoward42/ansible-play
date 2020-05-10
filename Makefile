@@ -4,6 +4,7 @@ MY_SSH_PUBLIC_KEY := $(shell cat ~/.ssh/id_rsa.pub)
 managed-node-run: managed-node-image
 	cd machines/managednode; \
 	docker run \
+		-d \
 		--rm \
 		-p 4848:22 \
 		--name=managednode \
@@ -14,5 +15,6 @@ managed-node-image:
 	cd machines/managednode; \
 	docker build \
 		-t managednode \
+		--rm \
 		--build-arg SSH_KEY="$(MY_SSH_PUBLIC_KEY)" \
 		.

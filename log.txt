@@ -11,10 +11,34 @@ o  Try this instead
 		*  does it leave sshd running? = yes
 		*  can you ssh into it with root password?
 	*  doc so far
-	o  bank
+	*  bank
 	o  try the more secure options
+		*  read and grok
+		o  try it
+			o  copy on id_rsa.pub and try it
+				*  does it run?
+				*  does it have the rsa key installed? = yes
+				*  who owns it = root
+				*  and what perm? = root has rw
+				*  can I ssh into it now? and does it not ask me 
+				   for password? = yes/works as wishes with:
+				   ssh root@localhost -p 4848
+		*  if works - disable password login too
+			*  need vi on the mc
+			*  with sed - but what to change
+				*  see if can infer
+					#PasswordAuthentication yes
+					becomes
+					PasswordAuthentication no
+				*  sed cmd line
+					sed 's/unix/linux/' geekfile.txt
+					sed 's/^#?PasswordAuthentication.*$/PasswordAuthentication no/' /etc/ssh/sshd_config
+
+		*  update docco
 
 o  Ditch some of the stuff below?
+o  Add python
+o  Consider control node and docker compose story
 
 Notes,
 
