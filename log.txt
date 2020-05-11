@@ -1,7 +1,20 @@
-*  Add python
-	*  see what version you get = none
-	*  how to apt install python - already there
 o  Consider control node and docker compose story
+	o  How should the control node be different?
+	o  Is there a public image?, although we'll want to mount the
+	   tutorial into it, and give it some keys - no std image
+	o  Start working up from scratch
+		*  Base Ubuntu 18.04 (has python 3.6)
+		*  Install ansible
+		o  Create non-root user with sudo privileges
+		o  Access to a rsa key-pair dedicated to this user
+		o  Copy this key pair onto the control node
+
+	o  Go back to managednode to copy on the public ansible keypair as
+	   well as mine. Can retain the user as root in this case.
+
+	o  the keys we installed on managednode are good for me sshingin from
+	   docker host, but the ansible control node will need another pair
+	   right? to ssh from control node to managednode?
 
 o  start the tutorial
     o  attempt to get the nginx playbook to work, then document it,

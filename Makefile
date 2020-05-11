@@ -18,3 +18,19 @@ managed-node-image:
 		--rm \
 		--build-arg SSH_KEY="$(MY_SSH_PUBLIC_KEY)" \
 		.
+
+.PHONY: control-node-run
+control-node-run: control-node-image
+	cd machines/controlnode; \
+	docker run \
+		--rm \
+		--name=controlnode \
+		controlnode
+
+.PHONY: control-node-image
+control-node-image:
+	cd machines/controlnode; \
+	docker build \
+		-t controlnode \
+		--rm \
+		.
