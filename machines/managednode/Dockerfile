@@ -1,7 +1,7 @@
 # This produces: Ubuntu + (running) ssh server + Python 3
 
-# rastasheep's base image provides Ubuntu + the running ssh server.
-# But it allows password authentication for root access, so we
+# rastasheep's base image provides Ubuntu (with Python 3.6) and adds the running ssh server.
+# But allows password authentication for root access, so we
 # configure rsa key based authentication, and disable password authentication.
 FROM rastasheep/ubuntu-sshd:18.04
 
