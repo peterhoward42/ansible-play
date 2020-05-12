@@ -1,27 +1,24 @@
-o  Consider control node and docker compose story
-	o  How should the control node be different?
-	o  Is there a public image?, although we'll want to mount the
-	   tutorial into it, and give it some keys - no std image
-	o  Start working up from scratch
-		*  Base Ubuntu 18.04 (has python 3.6)
-		*  Install ansible
-		*  Create non-root user with sudo privileges
+o  So now we can use (separate) make commands to bring up the infrastructure
+	*  Upgrade the makefile to make both images as a place holder to
+	   inject mutual dependencies at image level. Will probably deprecate
+	   doing the running from there later when got compose running.
+		*  Target to make images calls each separate target to make image
+		*  Comment out run targets
+	o  Get compose to the level that brings up all 3 machines
+		o  Try naive compose file
+			o  Presumably the lack of run paramaters will cause problems?
+				o  It doesn't say to run them as -d
+					o  But you can on the docker-compose cmd line (-d)
+				o  It doesn't say to remove the container on exit
+				o  It doesn't port map
+				o  It doesn't name the container
+				o  It doesn't scale the managed nodes
+	o  Consider adding a compose up make target
+	o  Add a down target
 
+o  Sort out hosts file on controlnode
+o  Correct key pair in use to be one minted for this story and reproducible
+   in e.g. CI context with no prior setup dependency.
+o  Add nginx installation to tutorial, and mount it into control node.
 
-
-
-	o username:new_password | chpasswd
-	o  Access to a rsa key-pair dedicated to this user
-		o  Copy this key pair onto the control node
-
-	o  Go back to managednode to copy on the public ansible keypair as
-	   well as mine. Can retain the user as root in this case.
-
-	o  the keys we installed on managednode are good for me sshingin from
-	   docker host, but the ansible control node will need another pair
-	   right? to ssh from control node to managednode?
-
-o  start the tutorial
-    o  attempt to get the nginx playbook to work, then document it,
-		o  wonder if bad example, with nginx also being a long running
-		   server? Could try I suppose.
+-----------------------------------------------------------------------

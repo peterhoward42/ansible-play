@@ -2,12 +2,12 @@ version: '3'
 
 services:
 
-  managed-node:
-    image: python:buster
-    tty: true  
+  managednode:
+    image: managednode
 
-  control-node:
-    image: ansible
-    tty: true
+  controlnode:
+    image: controlnode
+    # Mount the tutorial as a volume at runtime to get dynamic update
+    # during tutorial development.
     volumes:
       - ./tutorial:/tutorial
