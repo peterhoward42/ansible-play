@@ -5,8 +5,13 @@ o  Consider control node and docker compose story
 	o  Start working up from scratch
 		*  Base Ubuntu 18.04 (has python 3.6)
 		*  Install ansible
-		o  Create non-root user with sudo privileges
-		o  Access to a rsa key-pair dedicated to this user
+		*  Create non-root user with sudo privileges
+
+
+
+
+	o username:new_password | chpasswd
+	o  Access to a rsa key-pair dedicated to this user
 		o  Copy this key pair onto the control node
 
 	o  Go back to managednode to copy on the public ansible keypair as

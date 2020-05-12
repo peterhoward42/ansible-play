@@ -11,4 +11,9 @@ RUN apt-add-repository --yes ppa:ansible/ansible
 RUN apt update
 RUN apt install ansible --assume-yes
 
+# Create a sudo user called ansibleu, with password ansiblepasswd
+RUN useradd -m -g sudo ansibleu
+# RUN echo ansibleu:ansiblepasswd | chpasswd
+
+# Give it something long-running to do, to prevent the container exiting.
 CMD ["tail", "-f", "/dev/null"]
