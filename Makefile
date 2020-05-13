@@ -17,9 +17,16 @@ infrastructure-down:
 	cd docker; \
 	docker-compose down
 
-# This target exists only to get all the Docker images required created.
+# This target exists only to get all the Docker images required created, and
+# to ensure there is an RSA key pair ready to use in image creation.
 .PHONY: images
-images: managed-node-image control-node-image
+images: /tmp/tmp-rsa-key managed-node-image control-node-image
+
+# This target creates an ephemeral RSA key pair in a temporary
+# directory that can be picked up during the subsequent image
+# creation step.
+/tmp/tmp-rsa-key:
+	ssh-keygen -q -N "" -f /tmp/tmp-rsa-key
 
 # This target produces the Docker image for the managed node(s).
 .PHONY: managed-node-image
@@ -39,29 +46,6 @@ control-node-image:
 		-t controlnode \
 		--rm \
 		.
-
-#-----------------------------------------------------------------
-# These 'run' targets are temporary, and will be replaced by
-# docker-compose running them.
-#-----------------------------------------------------------------
-.PHONY: managed-node-run
-managed-node-run: managed-node-image
-	cd docker/machines/managednode; \
-	docker run \
-		-d \
-		--rm \
-		-p 4848:22 \
-		--name=managednode \
-		managednode
-
-
-.PHONY: control-node-run
-control-node-run: control-node-image
-	cd docker/machines/controlnode; \
-	docker run \
-		--rm \
-		--name=controlnode \
-		controlnode
 
 
 

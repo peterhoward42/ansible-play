@@ -1,18 +1,12 @@
-o  So now we can use (separate) make commands to bring up the infrastructure
-	*  Upgrade the makefile to make both images as a place holder to
-	   inject mutual dependencies at image level. Will probably deprecate
-	   doing the running from there later when got compose running.
-		*  Target to make images calls each separate target to make image
-		*  Comment out run targets
-	*  Get compose to the level that brings up all 3 machines
-	o  Consider adding a compose up make target to remove need for readme
-	   bits
-
-	o  Add a down target
+o  new make target to make keypair
+	o  DRY it up
+	o  Install THIS public key to the managed nodes
+	o  Install THIS key PAIR to the control node in ~/.ssh dir of
+	   the sudo user we created.
+	o  Can the control node, as the ansibleu ssh into the managed nodes?
+	o  Does this leave the private key in the image history?
 
 o  Sort out hosts file on controlnode
-o  Correct key pair in use to be one minted for this story and reproducible
-   in e.g. CI context with no prior setup dependency.
 o  Add nginx installation to tutorial, and mount it into control node.
 
 -----------------------------------------------------------------------
