@@ -55,16 +55,11 @@ https://serversforhackers.com/c/an-ansible2-tutorial
 https://hub.docker.com/r/rastasheep/ubuntu-sshd/
 
 
-### 
+### Notes for ongoing dev
 
+run docker-compose to create <N> managed node like this:
 
+docker-compose up -d --scale managednode=3
 
-docker exec -it ansible-play_control-node_1 /bin/bash 
-ping ansible-play_managed-node_1                    
-ping ansible-play_managed-node_2                   
-ansible some-args                              
-...
-CTRL-d
-
-docker-compose down
-```
+The network hostnames (on the private network) are e.g.
+ansible-play_managednode_2

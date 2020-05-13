@@ -4,15 +4,7 @@ o  So now we can use (separate) make commands to bring up the infrastructure
 	   doing the running from there later when got compose running.
 		*  Target to make images calls each separate target to make image
 		*  Comment out run targets
-	o  Get compose to the level that brings up all 3 machines
-		o  Try naive compose file
-			o  Presumably the lack of run paramaters will cause problems?
-				o  It doesn't say to run them as -d
-					o  But you can on the docker-compose cmd line (-d)
-				o  It doesn't say to remove the container on exit
-				o  It doesn't port map
-				o  It doesn't name the container
-				o  It doesn't scale the managed nodes
+	*  Get compose to the level that brings up all 3 machines
 	o  Consider adding a compose up make target
 	o  Add a down target
 
