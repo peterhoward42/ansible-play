@@ -2,27 +2,19 @@
 
 I want to do an Ansible tutorial.
 
-I aim for this repo to faciliate that, by docker-composing a
-small fleet of 'machines' to work with: one ansible control
-node, and two managed nodes.
+I aim for this repo to faciliate that, by docker-composing an
+infrastructure with a small fleet of 'machines' to work with:
+one ansible control node, and three managed nodes.
 
-### Bringing Up The Environment
+### Bringing Up (and Down) The Environment
 
 Nb. this **assumes** you aready have a pair of (rsa) SSH keys in your ~/.ssh/ directory.
 
 ```
 cd .
-make managed-node-run
+make infrastructure up
 ...
-ssh root@localhost -p 4848
-```
-
-### Checking the managed node's ssh server accepts our connection request
-
-This should not require a password - using instead rsa key auth.
-
-```
-ssh root@localhost -p 4848
+make infrastructure down
 ```
 
 ### What You Get
@@ -37,17 +29,6 @@ into the managed node as their root user.
 This repo contains some tutorial resources - and these are mounted
 into the ansible control node.
 
-The easiest way to get shell access into the ansible control need is with
-
-```
-docker exec -it controlnode /bin/sh
-```
-
-### Cleaning Up
-
-tbd - not using compose yet
-
-
 ### Credits
 
 https://serversforhackers.com/c/an-ansible2-tutorial
@@ -55,11 +36,3 @@ https://serversforhackers.com/c/an-ansible2-tutorial
 https://hub.docker.com/r/rastasheep/ubuntu-sshd/
 
 
-### Notes for ongoing dev
-
-run docker-compose to create <N> managed node like this:
-
-docker-compose up -d --scale managednode=3
-
-The network hostnames (on the private network) are e.g.
-ansible-play_managednode_2
