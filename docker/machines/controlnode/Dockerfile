@@ -15,5 +15,17 @@ RUN apt install ansible --assume-yes
 RUN useradd -m -g sudo ansibleu
 RUN echo ansibleu:ansiblepasswd | chpasswd
 
+# Install ssh keys for the ansible user.
+
+RUN mkdir /home/ansibleu/.ssh
+
+ARG SSH_KEY_PUBLIC
+ENV SSH_KEY_PUBLIC=$SSH_KEY_PUBLIC
+RUN echo "$SSH_KEY_PUBLIC" > /home/ansibleu/.ssh/id_rsa.pub
+
+ARG SSH_KEY_PRIVATE
+ENV SSH_KEY_PRIVATE=$SSH_KEY_PRIVATE
+RUN echo "$SSH_KEY_PRIVATE" > /home/ansibleu/.ssh/id_rsa
+
 # Give it something long-running to do, to prevent the container exiting.
 CMD ["tail", "-f", "/dev/null"]

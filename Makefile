@@ -34,16 +34,20 @@ managed-node-image:
 	docker build \
 		-t managednode \
 		--rm \
-		--build-arg SSH_KEY="$(public_key_text)" \
+		--build-arg SSH_KEY_PUBLIC="$(public_key_text)" \
 		.
 
 # Create Docker image for the Ansible control node.
 .PHONY: control-node-image
 control-node-image:
+	$(eval public_key_text := $(shell cat /tmp/rsa-key.pub))
+	$(eval private_key_text := $(shell cat /tmp/rsa-key))
 	cd docker/machines/controlnode; \
 	docker build \
 		-t controlnode \
 		--rm \
+		--build-arg SSH_KEY_PUBLIC="$(public_key_text)" \
+		--build-arg SSH_KEY_PRIVATE="$(private_key_text)" \
 		.
 
 

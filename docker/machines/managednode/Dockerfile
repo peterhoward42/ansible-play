@@ -11,9 +11,9 @@ RUN apt update; apt install --assume-yes vim
 # Write a public rsa access key to the server's authorized_keys file,
 # sourcing the value by expecting a SSH_KEY command line argument
 # when <docker build> is run.
-ARG SSH_KEY
-ENV SSH_KEY=$SSH_KEY
-RUN echo "$SSH_KEY" > /root/.ssh/authorized_keys
+ARG SSH_KEY_PUBLIC
+ENV SSH_KEYPUBLIC=$SSH_KEY_PUBLIC
+RUN echo "$SSH_KEY_PUBLIC" > /root/.ssh/authorized_keys
 RUN chmod 600 /root/.ssh/authorized_keys
 
 # Disable password-authenticated ssh access
