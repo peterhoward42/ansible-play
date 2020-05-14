@@ -1,12 +1,15 @@
 o  new make target to make keypair
-	o  DRY it up
-	o  Install THIS public key to the managed nodes
+	*  DRY it up and install THIS public key to managed node
+		*  Ensure it creates files locally on first run
+		*  Ensure it doesnt attempt make them on subsequent run
+		*  Ensure the managed node neds up with the key installed
 	o  Install THIS key PAIR to the control node in ~/.ssh dir of
 	   the sudo user we created.
 	o  Can the control node, as the ansibleu ssh into the managed nodes?
 	o  Does this leave the private key in the image history?
 
 o  Sort out hosts file on controlnode
+o  Integration test?
 o  Add nginx installation to tutorial, and mount it into control node.
 
 -----------------------------------------------------------------------
