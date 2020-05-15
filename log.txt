@@ -1,13 +1,19 @@
-o  new make target to make keypair
-	*  DRY it up and install THIS public key to managed node
-		*  Ensure it creates files locally on first run
-		*  Ensure it doesnt attempt make them on subsequent run
-		*  Ensure the managed node neds up with the key installed
-	*  Install THIS key PAIR to the control node in ~/.ssh dir of
-	   the sudo user we created.
-	o  Can the control node, as the ansibleu ssh into the managed nodes?
-	o  Does this leave the private key in the image history?
+o  Make keys simpler - just have them in the repo
+o  Move docker files into common dir and put keys there too
+	*  rename and move docker files up
+	*  have make build them from there
+	*  in the docker build copy keys from docker fs
+	*  manually install keys into a ssh dir under common root
+	*  test
+		*  fix build errors
+		*  fix run errors
+		*  are keys where they should be on
+		*  can ctrlnode ssh into managednode?
 
+o  Can we get more friendly hostnames?
+o  Should control node docker file use fewer layers with continuation lines?
+o  Looks like apt install ansible brings in python2.7 - do I need to
+   specify a particular version of ansible?
 o  Sort out hosts file on controlnode
 o  Integration test?
 o  Add nginx installation to tutorial, and mount it into control node.

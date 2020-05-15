@@ -18,36 +18,24 @@ infrastructure-down:
 
 # Create the Docker images required.
 .PHONY: images
-images: /tmp/rsa-key managed-node-image control-node-image
-
-# Make sure there's an RSA key pair set up in /tmp
-# (for SSH), so we can load the public one onto the
-# managed node(s).
-/tmp/rsa-key:
-	ssh-keygen -N "" -f /tmp/rsa-key
+images: managed-node-image control-node-image
 
 # Create Docker image for the managed node(s).
 .PHONY: managed-node-image
 managed-node-image:
-	$(eval public_key_text := $(shell cat /tmp/rsa-key.pub))
-	cd docker/machines/managednode; \
-	docker build \
+	cd docker; \
+	docker build -f Dockerfile-managednode \
 		-t managednode \
 		--rm \
-		--build-arg SSH_KEY_PUBLIC="$(public_key_text)" \
 		.
 
 # Create Docker image for the Ansible control node.
 .PHONY: control-node-image
 control-node-image:
-	$(eval public_key_text := $(shell cat /tmp/rsa-key.pub))
-	$(eval private_key_text := $(shell cat /tmp/rsa-key))
-	cd docker/machines/controlnode; \
-	docker build \
+	cd docker; \
+	docker build -f Dockerfile-controlnode\
 		-t controlnode \
 		--rm \
-		--build-arg SSH_KEY_PUBLIC="$(public_key_text)" \
-		--build-arg SSH_KEY_PRIVATE="$(private_key_text)" \
 		.
 
 
