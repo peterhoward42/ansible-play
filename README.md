@@ -17,22 +17,31 @@ make infrastructure up
 make infrastructure down
 ```
 
-### What You Get
+### Smoke Test for Ansible Viability
+Assumes infrastructure is up.
+
+```
+docker exec -it docker_controlnode_1 /bin/sh
+su ansibleu
+ansible all -m ping -u root
+```
+
+### What's In The Infrastructure?
 
 The ansible control node is Ubuntu + SSH client + Ansible.
 
 The managed nodes are Ubuntu + SSH server + Python3
 
-The nodes are pre-configured, such that the control node is able to SSH
-into the managed node as their root user.
+The control node has a (sudo) user called *ansibleu* to run ansible
+commands (like the smoke test above), or to ssh directly
+into root@docker_managednode_2 (or 1, or 3).
 
-This repo contains some tutorial resources - and these are mounted
-into the ansible control node.
+This repo has some tutorial resources - and these are mounted as
+a volume into the ansible control node at `/tutorial`.
 
 ### Credits
-
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-18-04
 https://serversforhackers.com/c/an-ansible2-tutorial
-
 https://hub.docker.com/r/rastasheep/ubuntu-sshd/
 
 

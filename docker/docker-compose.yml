@@ -7,6 +7,9 @@ services:
 
   controlnode:
     image: controlnode
+    environment:
+      - ANSIBLE_HOST_KEY_CHECKING=False
+      
     # Mount the tutorial as a volume at runtime to get dynamic update
     # during tutorial development.
     volumes:

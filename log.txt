@@ -1,21 +1,29 @@
-o  Make keys simpler - just have them in the repo
-o  Move docker files into common dir and put keys there too
-	*  rename and move docker files up
-	*  have make build them from there
-	*  in the docker build copy keys from docker fs
-	*  manually install keys into a ssh dir under common root
-	*  test
-		*  fix build errors
-		*  fix run errors
-		*  are keys where they should be on
-		*  can ctrlnode ssh into managednode?
-
-o  Can we get more friendly hostnames?
-o  Should control node docker file use fewer layers with continuation lines?
-o  Looks like apt install ansible brings in python2.7 - do I need to
+*  Make keys simpler - just have them in the repo
+*  Move docker files into common dir and put keys there too
+*  Can we get more friendly hostnames? - no with scale run option
+*  Looks like apt install ansible brings in python2.7 - do I need to
    specify a particular version of ansible?
-o  Sort out hosts file on controlnode
+*  Sort out hosts file on controlnode
+	*  is there a default /etc/ansible/hosts ? = yes
+	*  what do we wish it to say? below
+	*  make it so in docker build
+		*  install the required hostsfile in docker
+			*  have file to copy in docker context
+			*  do a copy of it in dockerfile
+			*  has it arrived = yes
+	*  test it with ansible ping command
+*  Can I get history going on control node?
+*  Study variables in hosts to ease connection
+o  Is the control node so slow to stop because of the tail -f?
+
 o  Integration test?
 o  Add nginx installation to tutorial, and mount it into control node.
 
 -----------------------------------------------------------------------
+hosts
+-----------------------------------------------------------------------
+
+[managednodes]
+docker_managednode_1
+docker_managednode_2
+docker_managednode_3
