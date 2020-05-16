@@ -8,13 +8,11 @@ one ansible control node, and three managed nodes.
 
 ### Bringing Up (and Down) The Environment
 
-Nb. this **assumes** you aready have a pair of (rsa) SSH keys in your ~/.ssh/ directory.
-
 ```
 cd .
-make infrastructure up
+make infrastructure-up
 ...
-make infrastructure down
+make infrastructure-down
 ```
 
 ### Smoke Test for Ansible Viability
@@ -41,7 +39,10 @@ a volume into the ansible control node at `/tutorial`.
 
 ### Credits
 https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-18-04
+
 https://serversforhackers.com/c/an-ansible2-tutorial
+
 https://hub.docker.com/r/rastasheep/ubuntu-sshd/
+
 
 

@@ -14,9 +14,67 @@
 	*  test it with ansible ping command
 *  Can I get history going on control node?
 *  Study variables in hosts to ease connection
-o  Is the control node so slow to stop because of the tail -f?
+o  Get onto ansible tutorial proper
+	o  Look ahead at subjects
+	o  Put these in studies
+	o  Work thru them - making them my own, leaving trail in tutorial dir.
+o  Defining your own module?
 
-o  Integration test?
+		
+
+		o  running ad-hoc commands like apt install xxx using the
+		   <shell> module. Introduces who to become (root) at the other end.
+		o  improving it by using the apt module to do the same thing
+		   and thus gaining idempotency. Introduces way to pass arguments
+		   to module: i.e. -a flag.
+		o  introducing playbook packaging of the above and new command:
+		   ansible-playbook. Uses the <apt> module.
+		o  introducing event driven chained actions aka handlers. Involves
+		   saying 'notify' in a task, and then defining that handler in
+		   the same yaml. Introduces the <service> module.
+			o  beware this might expect a real machine with init-style service
+			   running if it talks real service language to the host. And 
+			   the Docker/Ubuntu infrastructure won't support this.
+		o  More on playbooks
+			o  put the become commands at playbook scope
+			o  introduces variables in playbook '{{Jinja2}}'
+			o  introduces adding a new apt repo
+			o  introduces the register / when commands? - conditional logic
+			o  file module
+		o  Roles
+			o  Bind N playbooks together, along with role-scope data.
+			o  Defined with files in a directory hierarchy rooted at <roles>
+			o  Next level dir name is the role name.
+			o  Next level dir names follows fixed standard: 
+				o  files, handlers, meta, templates, tasks, vars.
+			o  You can init a role dir hierarchy using ansible-galaxy cmd.
+			o  Simply dump files into the files sub dir ready for copy.
+			o  Copy handlers blocks from monolith version 
+			   into handlers/main.yaml
+			o  Use meta/main.yaml to declare intra-role dependencies
+				o  Question - does the runtime auto sequence like make does,
+				   according to dependencies?
+			o  templates/foobar.j2 are Jinja2 templates
+			o  vars/main.yaml - define variables with k/v for each.
+				o  nb you can encrypt the vars file with ansible-vault
+			o  tasks/main.yaml
+				o  same in principle as monolithic playbook - but
+				   calls out to files/templates/vars etc
+			o  note introduction also to new modules:
+				o  copy, template, file
+			o  using it
+				o  put playbook that's going to use the role in same dir
+				   as that containing <roles>
+				o  much like monolith playbook, except that collapses into
+				   just hosts/connection/role(s) to run
+			o  Facts
+				o  Ansible lifecycle for tasks is to first gather
+				   <facts> about the hosts. Like how many cpus.
+				o  You can use these in the playbooks. As implict variables.
+			o  Vault
+				o  Use ansible-vault wrapper to create and work on encrypted
+				   variable files
+				o  You can do this retrospectively
 o  Add nginx installation to tutorial, and mount it into control node.
 
 -----------------------------------------------------------------------
