@@ -6,3 +6,10 @@
     pkg: silversearcher-ag
     state: latest
     update_cache: true
+
+
+- name: Touch /etc/ssh/imposter
+  file:
+    path: /etc/ssh/imposter.txt
+    state: touch
+    mode: u=rw,g=r,o=r

@@ -10,6 +10,13 @@ o  Get onto ansible tutorial proper
 			*  check its mounted into the control node dynamically
 			*  make a task to install ag using the shell module, and
 				*  try playbook again = works yeah!
+			o  experiment creating a file and setting perms on it with the
+			   file module
+			   	*  use it to touch a file 
+				o  rename the playbook to be example or learning
+				o  comment the tasks better
+				o  later will use 'when' it is created to stimulate
+				   a task that kicks ag with a search that depends on it
 
 
 o  Look into tests
@@ -25,11 +32,11 @@ o  Add nginx installation to tutorial, and mount it into control node.
 Design
 -----------------------------------------------------------------------
 
-o  use galaxy to create the role filesystem in the tutorial folder,
-o  add a readme to it to say that i used galaxy to do so
-o  install ag with apt
+*  use galaxy to create the role filesystem in the tutorial folder,
+*  add a readme to it to say that i used galaxy to do so
+*  install ag with apt
 o  use file module to write a file with a template and set permissions on it
-o  consume a variable for this task and use it in the templating perhaps
+o  consume a variable for this task ?
 o  use the ag installed to grep inside that file
 o  register a variable with the stdout of the ag grep
 o  have a when that consumes that result
