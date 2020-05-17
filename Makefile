@@ -24,7 +24,7 @@ images: managed-node-image control-node-image
 .PHONY: managed-node-image
 managed-node-image:
 	cd docker; \
-	docker build -f Dockerfile-managednode \
+	docker build -f managednode.Dockerfile \
 		-t managednode \
 		--rm \
 		.
@@ -33,7 +33,7 @@ managed-node-image:
 .PHONY: control-node-image
 control-node-image:
 	cd docker; \
-	docker build -f Dockerfile-controlnode\
+	docker build -f controlnode.Dockerfile \
 		-t controlnode \
 		--rm \
 		.

@@ -1,0 +1,25 @@
+This is based on this tutorial:
+
+https://serversforhackers.com/c/an-ansible2-tutorial
+
+But to learn more thoroughly, I will attempt to make a roles-style
+playbook that covers the following concepts - gleaned from the example above.
+
+
+o  go straight for roles architecture
+o  use ansible-galaxy
+o  use a handler
+o  use these modules:
+    o  apt, incl adding new repo
+    o  shell
+    o  file
+    o  copy
+    o  service // Drop this one - don't think it's viable on a Docker container host
+o  use become - pref at playbook scope
+o  use templates
+o  register / when
+o  role scope vars
+o  role dependencies
+o  encrypted variables incl retrospective
+o  use facts
+o  use a third party role

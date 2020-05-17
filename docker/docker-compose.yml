@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2' # Must be point-2 not just 3 for the bind mount to work.
 
 services:
 
@@ -10,7 +10,10 @@ services:
     environment:
       - ANSIBLE_HOST_KEY_CHECKING=False
       
-    # Mount the tutorial as a volume at runtime to get dynamic update
-    # during tutorial development.
+    # Bind-mount the tutorial directory at runtime to get two-way
+    # dynamic update between container and host during
+    # tutorial development.
     volumes:
-      - ./tutorial:/tutorial
+      - type: bind
+        source: ../tutorial
+        target: /tutorial

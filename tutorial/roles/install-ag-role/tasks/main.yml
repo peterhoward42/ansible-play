@@ -1,0 +1,8 @@
+---
+# tasks file for my-example
+
+- name: Install Ag
+  apt:    
+    pkg: silversearcher-ag
+    state: installed
+    update_cache: true
