@@ -47,7 +47,7 @@ At the moment all it does is install the <ag> package.
 docker exec -it docker_controlnode_1 /bin/sh
 su ansibleu
 cd tutorial
-ansible-playbook -u root install-ag-playbk.yaml
+ansible-playbook -u root run-muck-about-role.yaml
 ```
 
 

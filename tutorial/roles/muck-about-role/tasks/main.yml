@@ -1,6 +1,7 @@
 ---
-# tasks file for my-example
+# tasks file for the 'muck-about' ansible role.
 
+# Installs the ag (grep-like) tool using the <apt> module.
 - name: Install Ag
   apt:    
     pkg: silversearcher-ag
@@ -8,6 +9,8 @@
     update_cache: true
 
 
+# Uses the <file> module to <touch> a file called <imposter.txt>
+# in /etc/ssh/
 - name: Touch /etc/ssh/imposter
   file:
     path: /etc/ssh/imposter.txt

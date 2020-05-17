@@ -13,8 +13,8 @@ o  Get onto ansible tutorial proper
 			o  experiment creating a file and setting perms on it with the
 			   file module
 			   	*  use it to touch a file 
-				o  rename the playbook to be example or learning
-				o  comment the tasks better
+				*  rename the playbook to be example or learning
+				*  comment the tasks better
 				o  later will use 'when' it is created to stimulate
 				   a task that kicks ag with a search that depends on it
 
