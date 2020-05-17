@@ -3,8 +3,8 @@
 I want to do an Ansible tutorial.
 
 I aim for this repo to faciliate that, by docker-composing an
-infrastructure with a small fleet of 'machines' to work with:
-one ansible control node, and three managed nodes.
+infrastructure with a small fleet of 'machines' to work with -
+comprising one ansible control node, and three managed nodes.
 
 ### Bringing Up (and Down) The Environment
 
@@ -36,6 +36,20 @@ into root@docker_managednode_2 (or 1, or 3).
 
 This repo has some tutorial resources - and these are mounted as
 a volume into the ansible control node at `/tutorial`.
+
+### Running the tutorial playbook
+
+This is the playbook I'm evolving - based on a rules-based
+setup.
+
+At the moment all it does is install the <ag> package.
+```
+docker exec -it docker_controlnode_1 /bin/sh
+su ansibleu
+cd tutorial
+ansible-playbook -u root install-ag-playbk.yaml
+```
+
 
 ### Credits
 https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-18-04

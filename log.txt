@@ -8,13 +8,8 @@ o  Get onto ansible tutorial proper
 			*  install ansible locally to play with galaxy in /tmp
 			*  use ansible-galaxy to make the fs
 			*  check its mounted into the control node dynamically
-			o  make a task to install ag using the shell module, and
-			   call it from the top
-				*  can't get permissions to connect
-					*  got cmd wrong, should be:
-						*  ansible -u root  all -m ping
-						*  nb the -b --become-user is for client side
-				o  try playbook again
+			*  make a task to install ag using the shell module, and
+				*  try playbook again = works yeah!
 
 
 o  Look into tests

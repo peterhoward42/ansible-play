@@ -4,5 +4,5 @@
 - name: Install Ag
   apt:    
     pkg: silversearcher-ag
-    state: installed
+    state: latest
     update_cache: true
