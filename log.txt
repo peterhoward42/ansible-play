@@ -1,3 +1,7 @@
+o  Going to shelve this at this point to switch focus to wider topics rather
+   than go deeper...
+
+
 o  Get onto ansible tutorial proper
 	*  Look ahead at subjects
 	*  Put these in studies
