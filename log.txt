@@ -1,3 +1,45 @@
+o  Looking at CircleCI deployment to GCE - whoo how about that!
+	*  Source:
+	https://circleci.com/blog/simplifying-your-ci-cd-build-pipeline-to-gke-with-circleci-orbs/
+	*  Get or refresh GCP account
+	*  Create <hsbc-proj-1> project
+	*  Install and init gcloud sdk
+	*  Create a cluster <hsbc-cluster-1>
+	*  Scale the number of nodes back to zero when not in use
+	*  Init a kube-config locally
+	*  Tag and push the local images
+		*  controlnode
+			*  tag as: eu.gcr.io/hsbc-proj-1/controlnode
+			*  Need to authenticate docker to gcloud
+			*  push the image to gcr
+		*  managednode
+			*  tag 
+			*  push the image to gcr
+	*  Get a manual deployment working
+		*  For the managed node
+		*  For the control node
+		*  scale down the cluster
+	*  Switch this to study to have a record
+	o  On to CircleCI...
+		o  make a starter .circleci/config.yaml and make sure not git ignored
+		o  scrutinize it to work out what it is doing
+		o  cut out redundant bits
+		o  change filenames etc.
+
+
+o  Next steps for automating it with circleci
+	o  maybe look first at a circleci tutorial
+	o  study what the circle ci config is doing - so as to work out
+	   how much I should copy or change - because it's not a node app.
+
+
+o  Upgrade README and comments in ansible-play repo to reflect the dual modes 
+   of k8s vs docker-compose
+
+
+
+
+
 o  Going to shelve this at this point to switch focus to wider topics rather
    than go deeper...
 

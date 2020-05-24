@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ansible-play-deployment
+  labels:
+    app: ansible-play
+spec:
+    replicas: 1 
+    selector:
+        matchLabels:
+            app: ansible-play
+    template:
+        metadata:
+            labels:
+                app: ansible-play
+        spec:
+            containers:
+            - name: managednode
+              image: eu.gcr.io/hsbc-proj-1/managednode:latest
+            - name: controlnode
+              image: eu.gcr.io/hsbc-proj-1/controlnode:latest
