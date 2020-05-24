@@ -10,10 +10,10 @@ jobs:
       - checkout
       - gcr/gcr-auth
       - gcr/build_and_push_image:
-        dockerfile: managednode.Dockerfile
-        path: docker
-        image: hsbc-proj-1/managednode
-        registry-url: eu.gcr.io
+          dockerfile: managednode.Dockerfile
+          path: docker
+          image: hsbc-proj-1/managednode
+          registry-url: eu.gcr.io
     
   update-managed-node-in-ansible-play-live-deployment:
     description: Deploy new managednode container to existing deployment on Google Kubernetes Engine
@@ -22,11 +22,11 @@ jobs:
       - gcp-gke/install
       - gcp-gke/init
       - gcp-gke/publish-and-rollout-image:
-        cluster: hsbc-cluster-1
-        container: managednode
-        deployment: ansible-play-deployment
-        image: eu.gcr.io/hsbc-proj-1/managednode:latest
-        tag: $CIRCLE_SHA1
+          cluster: hsbc-cluster-1
+          container: managednode
+          deployment: ansible-play-deployment
+          image: eu.gcr.io/hsbc-proj-1/managednode:latest
+          tag: $CIRCLE_SHA1
 
 workflows:
   build_update_deploy:
