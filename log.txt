@@ -21,10 +21,19 @@ o  Looking at CircleCI deployment to GCE - whoo how about that!
 		*  scale down the cluster
 	*  Switch this to study to have a record
 	o  On to CircleCI...
-		o  make a starter .circleci/config.yaml and make sure not git ignored
-		o  scrutinize it to work out what it is doing
-		o  cut out redundant bits
-		o  change filenames etc.
+		*  make a starter .circleci/config.yaml and make sure not git ignored
+		*  scrutinize it to work out what it is doing
+		*  cut out redundant bits
+			*  don't need the build steps
+		*  edit... change filenames etc.
+		*  gun for just managedimage to start wiht
+		o  create gcp service account
+		o  create circle project
+
+
+		o  now add control node
+		o  update summary notes
+		o  can specify build args as per docker compose
 
 
 o  Next steps for automating it with circleci
